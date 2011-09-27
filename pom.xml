@@ -7,6 +7,20 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>maven-gaefriendly-version-plugin Maven Mojo</name>
 	<url>http://pangratz.github.com/gaefriendly-version-maven-plugin/</url>
+
+	<properties>
+		<gitUser>pangratz</gitUser>
+		<gitProject>gaefriendly-version-maven-plugin</gitProject>
+		<scmUrl>scm:git:git@github.com:${gitUser}/${gitProject}.git</scmUrl>
+		<altDeploymentRepository>release-repo::default::file:../../repository/releases</altDeploymentRepository>
+	</properties>
+
+	<scm>
+		<connection>${scmUrl}</connection>
+		<url>${scmUrl}</url>
+		<developerConnection>${scmUrl}</developerConnection>
+	</scm>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -19,4 +33,14 @@
 			<version>2.2.1</version>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>deploy-snapshot</id>
+			<properties>
+				<altDeploymentRepository>snapshot-repo::default::file:repository/snapshots</altDeploymentRepository>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>
