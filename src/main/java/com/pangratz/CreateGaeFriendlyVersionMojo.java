@@ -25,7 +25,12 @@ public class CreateGaeFriendlyVersionMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException {
 		String version = mavenProject.getVersion();
 		Properties props = mavenProject.getProperties();
-		props.put(propertyName, version.toLowerCase());
-		getLog().info("added property " + propertyName + "=" + props.getProperty(propertyName));
+
+		String newVersion = version.toLowerCase();
+		newVersion = newVersion.replace('.', '-');
+		newVersion = newVersion.toLowerCase();
+		props.put(propertyName, newVersion);
+
+		getLog().info("added property " + propertyName + "=" + newVersion);
 	}
 }
